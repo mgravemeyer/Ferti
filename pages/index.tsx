@@ -1,6 +1,29 @@
 import type { NextPage } from 'next'
 import {useState} from "react";
 
+type AddButtonProps = {
+  label: string,
+  get: number,
+  add: () => void,
+  reduce: () => void,
+  change: (value: number) => void,
+}
+
+const AddButton = ({label, get, add, reduce, change}: AddButtonProps) => {
+
+    return (
+      <div>
+        <h1 className='text-center text-kb-white text-2xl pt-12 md:pt-0'>{label}</h1>
+          <div className='flex flex-row justify-center'>
+            <button className='text-6xl text-kb-white px-3' onClick={() => reduce()}>-</button>
+            <input pattern="\d*" width={2} style={{background: 'none'}} className='text-kb-white border-t-0 border-x-0 border-b-2 appearance-none border-2 text-8xl border-gray-200 rounded w-48 py-2 text-center leading-tight focus:outline-none focus:bg-white' type="number" value={get} onChange={(e) => change(parseFloat(e.target.value))}/>
+            <button className='text-4xl text-kb-white px-3' onClick={() => add()}>+</button>
+          </div>
+      </div>
+    )
+}
+
+
 const Home: NextPage = () => {
 
   let [ausbringmenge, setAusbringmenge] =  useState(0.0);
@@ -9,6 +32,16 @@ const Home: NextPage = () => {
   let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(0.0);
 
   return (
+      <>
+
+      <AddButton label='Geschwindigkeit'
+                 get={geschwindigkeit}
+                 add={() => setGeschwindigkeit(geschwindigkeit + 1)}
+                 reduce={() => setGeschwindigkeit(geschwindigkeit - 1)}
+                 change={(value) => setGeschwindigkeit(value)}
+      />
+
+
       <div className='flex flex-col justify-between bg-kb-green h-full'>
             <div className='flex flex-col mt-6'>
               <div className='flex flex-row justify-evenly p-5 text-3xl'>
@@ -20,14 +53,6 @@ const Home: NextPage = () => {
                     <div className='flex flex-row justify-center pt-3'>
                         <p style={{background: 'none'}} className='text-kb-white border-2 appearance-none border-2 text-8xl border-gray-200 rounded w-48 py-2 text-center leading-tight focus:outline-none focus:bg-white'>{ausbringmenge}</p>
                     </div>
-                  </div>
-                  <div>
-                    <h1 className='text-center text-kb-white text-2xl pt-12 md:pt-0'>Geschwindigkeit</h1>
-                      <div className='flex flex-row justify-center'>
-                        <button className='text-6xl text-kb-white px-3' onClick={() => setGeschwindigkeit(geschwindigkeit - 1)}>-</button>
-                        <input pattern="\d*" width={2} style={{background: 'none'}} className='text-kb-white border-t-0 border-x-0 border-b-2 appearance-none border-2 text-8xl border-gray-200 rounded w-48 py-2 text-center leading-tight focus:outline-none focus:bg-white' type="number" value={geschwindigkeit} onChange={(e) => setGeschwindigkeit(parseFloat(e.target.value))}/>
-                        <button className='text-4xl text-kb-white px-3' onClick={() => setGeschwindigkeit(geschwindigkeit + 1)}>+</button>
-                      </div>
                   </div>
               </div>
               <div className='flex flex-col md:flex-row justify-evenly pt-8'>
@@ -66,7 +91,8 @@ const Home: NextPage = () => {
           </footer>
         </div>
       </div>
+
+      </>
   )
 }
-
 export default Home
