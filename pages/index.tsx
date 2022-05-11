@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Image from "next/image";
 import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
@@ -62,6 +62,11 @@ const Home: NextPage = () => {
   let [reichweite, setReichweite] =  useState(0.0);
   let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(200);
 
+  useEffect(() => {
+        setAusbringmenge(geschwindigkeit * zapfwellendrehzahl);
+        setReichweite(geschwindigkeit * geschwindigkeit);
+  }, [geschwindigkeit, zapfwellendrehzahl])
+
   return (
       <div className='p-8 flex flex-col justify-between items-center h-screen'>
           <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
@@ -84,7 +89,7 @@ const Home: NextPage = () => {
                          floatDigits={0}
               />
             </div>
-            <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0'>
+            <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 w-60'>
               <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
               <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} unit='m³/ha'/>
               <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} unit='meter'/>
