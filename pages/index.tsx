@@ -78,8 +78,8 @@ const Home: NextPage = () => {
               />
               <AddButton label='Zapfwellendrehzahl'
                          get={zapfwellendrehzahl}
-                         add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 1)}
-                         reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 1)}
+                         add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 50)}
+                         reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 50)}
                          change={(value) => setZapfwellendrehzahl(value)}
                          floatDigits={0}
               />
