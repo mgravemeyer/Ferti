@@ -8,9 +8,6 @@ html {
     font-family: 'Poppins', sans-serif;
 }
 
-html, body{min-height:100%;}
-html { overflow-y:scroll; }
-
 @layer utilities {
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
