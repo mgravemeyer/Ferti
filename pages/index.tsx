@@ -58,9 +58,9 @@ const DisplayNumber = ({label, get, unit, className, icon}: DisplayNumberProps) 
 const Home: NextPage = () => {
 
   let [ausbringmenge, setAusbringmenge] =  useState(0.0);
-  let [geschwindigkeit, setGeschwindigkeit] =  useState(0.0);
+  let [geschwindigkeit, setGeschwindigkeit] =  useState(10.0);
   let [reichweite, setReichweite] =  useState(0.0);
-  let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(0.0);
+  let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(200);
 
   return (
       <div className='p-8 flex flex-col justify-between items-center h-screen'>
