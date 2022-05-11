@@ -91,13 +91,13 @@ const Home: NextPage = () => {
             </div>
           </div>
 
-          <footer className="bg-kb-white md:flex md:items-center md:justify-between">
-            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 text-kb-green-dark">
-                © 2022 <a href="https://google.com" className="hover:underline">Hermann und Max</a>. All Rights Reserved.
+          <footer className="bg-kb-white flex flex-col gap-0 md:flex-row">
+            <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
+              <p className='md:mr-8'>© 2022 Hermann Max</p>
             </span>
-            <ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+            <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
                 <li>
-                    <a href="#" className="mr-4 hover:underline md:mr-6 text-kb-green-dark">Datenschutzbestimmungen</a>
+                    <a href="#" className="hover:underline text-kb-green-dark mr-2">Datenschutzbestimmungen</a>
                 </li>
                 <li>
                     <a href="#" className="hover:underline text-kb-green-dark">Kontakt</a>
