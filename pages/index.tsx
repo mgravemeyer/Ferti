@@ -41,6 +41,13 @@ const Home: NextPage = () => {
                  change={(value) => setGeschwindigkeit(value)}
       />
 
+      <AddButton label='Zapfwellendrehzahl'
+                 get={zapfwellendrehzahl}
+                 add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 1)}
+                 reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 1)}
+                 change={(value) => setZapfwellendrehzahl(value)}
+      />
+
 
       <div className='flex flex-col justify-between bg-kb-green h-full'>
             <div className='flex flex-col mt-6'>
