@@ -1,5 +1,8 @@
 import type { NextPage } from 'next'
 import {useState} from "react";
+import Image from "next/image";
+import distanceIcon from '../public/distance.png';
+import tankerIcon from '../public/tanker.png';
 
 type AddButtonProps = {
   label: string,
@@ -7,17 +10,18 @@ type AddButtonProps = {
   add: () => void,
   reduce: () => void,
   change: (value: number) => void,
-  className?: string
+  className?: string,
+  floatDigits: number
 }
 
-const AddButton = ({label, get, add, reduce, change, className}: AddButtonProps) => {
+const AddButton = ({label, get, add, reduce, change, className, floatDigits}: AddButtonProps) => {
 
     return (
       <div className={className}>
         <h1 className='text-center text-kb-green-dark text-2xl md:pt-0'>{label}</h1>
           <div className='flex flex-row justify-center'>
             <button className='text-6xl text-kb-green-dark px-3' onClick={() => reduce()}>-</button>
-            <input pattern="\d*" width={2} style={{background: 'none'}} className='text-kb-green-dark border-t-0 border-x-0 border-b-2 appearance-none border-2 text-8xl border-gray-200 rounded w-48 py-2 text-center leading-tight focus:outline-none focus:bg-white' type="number" value={get} onChange={(e) => change(parseFloat(e.target.value))}/>
+            <input pattern="\d*" width={2} style={{background: 'none'}} className='text-kb-green-dark border-t-0 border-x-0 border-b-2 appearance-none border-2 text-8xl border-gray-200 w-48 text-center leading-tight focus:outline-none focus:bg-white' type="number" value={get.toFixed(floatDigits)} onChange={(e) => change(parseFloat(e.target.value))}/>
             <button className='text-4xl text-kb-green-dark px-3' onClick={() => add()}>+</button>
           </div>
       </div>
@@ -26,20 +30,27 @@ const AddButton = ({label, get, add, reduce, change, className}: AddButtonProps)
 
 type DisplayNumberProps = {
   label: string,
-  get: number
+  get: number,
+  unit: string,
+  className?: string
+  icon: any
 }
 
-const DisplayNumber = ({label, get}: DisplayNumberProps) => {
+const DisplayNumber = ({label, get, unit, className, icon}: DisplayNumberProps) => {
 
     return (
-      <div className='flex flex-col md:flex-row justify-evenly p-10'>
-        <div>
-            <h1 className='text-center text-kb-green-dark text-2xl'>{label}</h1>
-            <div className='flex flex-row justify-center pt-3'>
-            <p style={{background: 'none'}} className='text-kb-green-dark border-2 appearance-none border-2 text-8xl border-gray-200 w-48 py-2 text-center leading-tight focus:outline-none focus:bg-white'>{get}</p>
+        <div className={`flex flex-row items-center ${className}`}>
+          <div className='flex items-center h-full w-16 pr-4'>
+            <Image alt='icon' src={icon}/>
+          </div>
+          <div className='flex flex-col justify-center'>
+            <div className='flex flex-row items-baseline'>
+              <p className='text-kb-green-dark text-2xl'>{get}&nbsp;</p>
+              <p className='text-kb-green-dark'>{unit}</p>
             </div>
+            <p className='text-kb-green-dark'>{label}</p>
+          </div>
         </div>
-      </div>
     )
 }
 
@@ -52,24 +63,31 @@ const Home: NextPage = () => {
   let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(0.0);
 
   return (
-      <div className='p-8 flex flex-col justify-between items-center md:items-start h-screen'>
-          <h1 className='text-4xl font-extrabold'>Kacke Ballern</h1>
+      <div className='p-8 flex flex-col justify-between items-center h-screen'>
+          <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-          <div className='flex flex-row'>
-              <div className='pb-12'>
-                <AddButton label='Geschwindigkeit'
-                           get={geschwindigkeit}
-                           add={() => setGeschwindigkeit(geschwindigkeit + 1)}
-                           reduce={() => setGeschwindigkeit(geschwindigkeit - 1)}
-                           change={(value) => setGeschwindigkeit(value)}
-                           className='pb-8 md:pb-16'
-                />
-                <AddButton label='Zapfwellendrehzahl'
-                           get={zapfwellendrehzahl}
-                           add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 1)}
-                           reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 1)}
-                           change={(value) => setZapfwellendrehzahl(value)}
-                />
+          <div className='flex flex-col md:flex-row pt-8 pb-24'>
+            <div className='pt-8'>
+              <AddButton label='Geschwindigkeit'
+                         get={geschwindigkeit}
+                         add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
+                         reduce={() => setGeschwindigkeit(geschwindigkeit - 0.5)}
+                         change={(value) => setGeschwindigkeit(value)}
+                         className='pb-8 md:pb-16'
+                         floatDigits={1}
+              />
+              <AddButton label='Zapfwellendrehzahl'
+                         get={zapfwellendrehzahl}
+                         add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 1)}
+                         reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 1)}
+                         change={(value) => setZapfwellendrehzahl(value)}
+                         floatDigits={0}
+              />
+            </div>
+            <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0'>
+              <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
+              <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} unit='m³/ha'/>
+              <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} unit='meter'/>
             </div>
           </div>
 

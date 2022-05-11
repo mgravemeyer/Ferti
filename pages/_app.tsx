@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app'
 function App({ Component, pageProps }: AppProps) {
   return (
       <>
-        <title>Kacke Ballern</title>
+        <title>Gülle-Nährstoffe</title>
         <Component {...pageProps} />
       </>
   )
