@@ -66,7 +66,7 @@ const Home: NextPage = () => {
       <div className='p-8 flex flex-col justify-between items-center h-screen'>
           <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-          <div className='flex flex-col md:flex-row pt-8 pb-24'>
+          <div className='flex flex-col md:flex-row pt-8 pb-32'>
             <div className='pt-8'>
               <AddButton label='Geschwindigkeit'
                          get={geschwindigkeit}
