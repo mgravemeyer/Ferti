@@ -4,6 +4,87 @@ import Image from "next/image";
 import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
 
+const AnnimatedNumber = ({get}: {get:number}) => {
+
+    let old = createNumberArray(0);
+
+    function createNumberArray(number: number) {
+        const numberArray = number.toString().split('');
+        for (let i = 0; numberArray.length < 4; i++) {
+            if (numberArray[0] === '-') {
+                numberArray[0] = '0';
+            }
+            numberArray.unshift('0');
+        }
+        return numberArray.map(x => x === '-' || x === '+' ? x : parseInt(x));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    function animateNumber(number: number, element: any) {
+        // Leert das Element
+        element.innerHTML = '';
+        // Berechnet den neuen Number Array
+        const numberArray = createNumberArray(number);
+        // Legt alles in das HTML Element
+        createNumberHTML(numberArray, old, element);
+        // Berechnet die Ticks die verändert werden sollen.
+        const ticks = [...element.querySelectorAll("span[data-value]")];
+        setTimeout(() => {
+            // Animiert die Werte
+            for (let tick of ticks) {
+                let dist = parseInt(tick.getAttribute("data-value")) - 1;
+                tick.style.transform = `translateY(-${dist * 100}%)`;
+            }
+        }, 0);
+        // Setzten den Zahlen Array zu dem Alten Status
+        old = numberArray;
+    }
+
+    function createNumberHTML(numbers: any, old: any, element: any) {
+        for (let i = 0; i < numbers.length; i++) {
+            if (isNaN(numbers[i]) || isNaN(old[i])) {
+                element.insertAdjacentHTML(
+                    "beforeend",
+                    `<span class="number-span" data-value="${calcDeltaSight(old[i], numbers[i]).length}">${calcDeltaSight(old[i], numbers[i]).join('')}</span>`
+                );
+            } else {
+                element.insertAdjacentHTML(
+                    "beforeend",
+                    `<span class="number-span" data-value="${calcDeltaBetweenNumbers(old[i], numbers[i]).length}">${calcDeltaBetweenNumbers(old[i], numbers[i]).join('')}</span>`
+                );
+            }
+        }
+        return element;
+    }
+
+    function calcDeltaSight(oldSight: any, newSight: any) {
+        return oldSight !== newSight ? [`<span class="number-span-nested">${oldSight}</span>`, `<span>${newSight}</span>`] : [`<span>${newSight}</span>`];
+    }
+
+    function calcDeltaBetweenNumbers(oldNumber: number, newNumber: number) {
+        let numberArray = [oldNumber];
+        let notFound = true;
+        if (oldNumber === newNumber) return numberArray.map(x => `<span>${x}</span>`);
+        while (notFound) {
+            oldNumber++;
+            if (oldNumber > 9) oldNumber = 0;
+            numberArray.push(oldNumber);
+            if (oldNumber === newNumber) notFound = false;
+        }
+        return numberArray.map(x => `<span class="number-span-nested">${x}</span>`);
+    }
+
+    useEffect(() => {
+        const value = parseInt(old.join('')) + get.toString();
+        animateNumber(parseInt(value), document.querySelector('.numbers'));
+    }, [animateNumber, get, old])
+
+    return (
+        <div className="numbers">0000</div>
+    )
+}
+
+
 type AddButtonProps = {
   label: string,
   get: number,
@@ -45,7 +126,7 @@ const DisplayNumber = ({label, get, unit, className, icon}: DisplayNumberProps) 
           </div>
           <div className='flex flex-col justify-center'>
             <div className='flex flex-row items-baseline'>
-              <p className='text-kb-green-dark text-2xl'>{get}&nbsp;</p>
+              <AnnimatedNumber get={get}/>
               <p className='text-kb-green-dark'>{unit}</p>
             </div>
             <p className='text-kb-green-dark'>{label}</p>
