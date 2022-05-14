@@ -5,6 +5,33 @@ import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
 import { useSpring, animated } from 'react-spring'
 
+type SelectionButtonProps = {
+  onClickAction: () => void,
+  element: any,
+  selection: any
+}
+
+const SelectionButton = ({onClickAction, element, selection}: SelectionButtonProps) => {
+    const [props, set] = useSpring(() => ({
+        transform: `scale(1)`,
+        boxShadow: `0px 5px 15px 0px rgba(0, 0, 0, 0.07)`,
+        config: { tension: 400, mass: 2, velocity: 5 }
+    }))
+
+    return (
+        <animated.div
+            style={props}
+            onMouseEnter={() => set({transform: `scale(${ 1.1 })`, boxShadow: `0px ${'10px 20px'} 0px rgba(0, 0, 0, 0.07)`})}
+            onMouseLeave={() => set({transform: `scale(${ 1 })`, boxShadow: `0px ${'5px 15px'} 0px rgba(0, 0, 0, 0.07)`})}
+            onClick={onClickAction}
+            key={element}
+            className={`py-1 px-2 cursor-pointer ${element === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}
+        >
+            <p>{element}</p>
+        </animated.div>
+    )
+}
+
 const PumpSelection = () => {
 
     type json = {
@@ -103,27 +130,15 @@ const PumpSelection = () => {
         }
     }
 
-    const props = useSpring({
-        transform: `scale(1)`,
-        from: { transform: `scale(0.5)`},
-        config: {
-            tension: 400,
-            mass: 2,
-            velocity: 5
-        }
-    })
+
 
     return (
         <>
           <div className='flex flex-col pt-6'>
           <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>Pumpen-Typ</h1>
-            <div className='flex flex-row justify-center gap-1 pt-2'>
+            <div className='flex flex-row justify-center gap-3 pt-2'>
                 {Object.keys(optionsNew).map((element) => (
-                    <animated.div key={'test'} style={props}>
-                    <div onClick={() => {setSelection(element);setNestedSelection('')}} key={element} className={`transform motion-safe:hover:scale-105 py-1 px-2 cursor-pointer ${element === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
-                      <p>{element}</p>
-                    </div>
-                    </animated.div>
+                    <SelectionButton key={element} onClickAction={() => {console.log(element);setSelection(element);setNestedSelection('')}} element={element} selection={selection}/>
                 ))}
 
             </div>
