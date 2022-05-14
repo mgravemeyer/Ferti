@@ -315,7 +315,7 @@ const AddButton = ({label, get, add, reduce, change, className, floatDigits, uni
 
 const Navigation = () => {
     return (
-        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+        <nav className="bg-white border-gray-200 rounded dark:bg-gray-800">
             <div className="container flex flex-wrap justify-between items-center mx-auto">
                 <a href="" className="flex items-center">
                     <img src="" className="mr-3 h-6 sm:h-9" alt=""/>
@@ -343,7 +343,7 @@ const Navigation = () => {
                         <li>
                             <a href="#"
                                className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                               aria-current="page">Home</a>
+                               aria-current="page">Rechner</a>
                         </li>
                         <li>
                             <a href="#"
@@ -422,13 +422,13 @@ const Home: NextPage = () => {
   }, [geschwindigkeit, zapfwellendrehzahl])
 
   return (
-      <>
+      <div className='h-vh h-screen flex flex-col justify-between p-6 md:px-44 md:py-10'>
           <Navigation/>
-          <div className='p-8 flex flex-col justify-between items-center h-screen'>
+          <div className='flex flex-col justify-between items-center'>
               <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-              <div className='flex flex-col md:flex-row pt-8 pb-32'>
-                <div className='pt-8 w-96'>
+              <div className='flex flex-col md:flex-row h-full'>
+                <div className=''>
                   <AddButton label='Geschwindigkeit'
                              get={geschwindigkeit}
                              add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
@@ -454,8 +454,8 @@ const Home: NextPage = () => {
                   <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
                 </div>
               </div>
-
-              <footer className="bg-kb-white flex flex-col gap-0 md:flex-row">
+          </div>
+            <footer className="bg-kb-white flex flex-col gap-0 md:flex-row justify-center items-center">
                 <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
                   <p className='md:mr-8'>© 2022 Hermann Max</p>
                 </span>
@@ -467,9 +467,8 @@ const Home: NextPage = () => {
                         <a href="#" className="hover:underline text-kb-green-dark">Kontakt</a>
                     </li>
                 </ul>
-              </footer>
-          </div>
-      </>
+            </footer>
+      </div>
   )
 }
 export default Home
