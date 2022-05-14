@@ -136,7 +136,7 @@ const PumpSelection = () => {
 
     return (
         <>
-          <div className='flex flex-col pt-6'>
+          <div className='flex flex-col'>
           <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>Pumpen-Typ</h1>
             <div className='flex flex-row justify-center gap-3 pt-2'>
                 {Object.keys(optionsNew).map((element) => (
@@ -315,8 +315,8 @@ const AddButton = ({label, get, add, reduce, change, className, floatDigits, uni
 
 const Navigation = () => {
     return (
-        <nav className="bg-white border-gray-200 rounded dark:bg-gray-800">
-            <div className="container flex flex-wrap justify-between items-center mx-auto">
+        <nav className="bg-white border-gray-200 rounded dark:bg-gray-800 pb-8">
+            <div className="flex flex-wrap justify-between items-center">
                 <a href="" className="flex items-center">
                     <img src="" className="mr-3 h-6 sm:h-9" alt=""/>
                     <span
@@ -422,13 +422,13 @@ const Home: NextPage = () => {
   }, [geschwindigkeit, zapfwellendrehzahl])
 
   return (
-      <div className='h-vh h-screen flex flex-col justify-between p-6 md:px-44 md:py-10'>
+      <div className='h-vh h-screen flex flex-col justify-between p-6 sm:px-20 lg:px-44 md:py-10'>
           <Navigation/>
           <div className='flex flex-col justify-between items-center'>
-              <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
+              <h1 className='text-3xl md:text-4xl font-extrabold text-center pb-10'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-              <div className='flex flex-col md:flex-row h-full'>
-                <div className=''>
+              <div className='flex flex-col md:flex-row h-full pb-8'>
+                <div className='pb-8'>
                   <AddButton label='Geschwindigkeit'
                              get={geschwindigkeit}
                              add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
@@ -443,31 +443,32 @@ const Home: NextPage = () => {
                              add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 50)}
                              reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 50)}
                              change={(value) => setZapfwellendrehzahl(value)}
+                             className='pb-8 md:pb-16'
                              floatDigits={0}
                              unit='U/min'
                   />
                   <PumpSelection/>
                 </div>
-                <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 pr-2'>
+                <div className='flex flex-col justify-center pl-4 md:pl-14 mb:pb-4 md:pt-0 pr-2 md:pb-20'>
                   <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
                   <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
                   <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
                 </div>
               </div>
           </div>
-            <footer className="bg-kb-white flex flex-col gap-0 md:flex-row justify-center items-center">
-                <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
-                  <p className='md:mr-8'>© 2022 Hermann Max</p>
-                </span>
-                <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
-                    <li>
-                        <a href="#" className="hover:underline text-kb-green-dark mr-2">Datenschutzbestimmungen</a>
-                    </li>
-                    <li>
-                        <a href="#" className="hover:underline text-kb-green-dark">Kontakt</a>
-                    </li>
-                </ul>
-            </footer>
+          <footer className="bg-kb-white flex flex-col gap-0 md:flex-row justify-center items-center">
+            <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
+              <p className='md:mr-8'>© 2022 Hermann Max</p>
+            </span>
+            <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
+                <li>
+                    <a href="#" className="hover:underline text-kb-green-dark mr-2">Datenschutzbestimmungen</a>
+                </li>
+                <li>
+                    <a href="#" className="hover:underline text-kb-green-dark">Kontakt</a>
+                </li>
+            </ul>
+          </footer>
       </div>
   )
 }
