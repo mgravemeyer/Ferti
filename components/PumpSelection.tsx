@@ -111,23 +111,27 @@ const PumpSelection = () => {
                 ))}
 
             </div>
+              <div className='bg-kb-green-dark w-100 h-0.5 mt-4'/>
             <div className='flex flex-row justify-center gap-3 pt-4 flex-wrap'>
                 {
                   // @ts-ignore
                   Object.keys(optionsNew[selection]).map((element) => (
-                    <SelectionButton key={element} onClickAction={() => {setNestedSelection(element)}} element={element} selection={nestedSelection}/>
+                    <SelectionButton key={element} onClickAction={() => {setNestedSelection(element); if(element === nestedSelection) { setNestedSelection('') }}} element={element} selection={nestedSelection}/>
                   ))
                 }
             </div>
               {nestedSelection !== '' &&
-                  <div className='flex flex-row justify-center gap-3 pt-4 flex-wrap'>
-                      {
-                        // @ts-ignore
-                        Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
-                          <SelectionButton key={element} onClickAction={() => {setNestedNestedSelection(element)}} element={element} selection={nestedNestedSelection}/>
-                        ))
-                      }
-                  </div>
+                  <>
+                      <div className='bg-kb-green-dark w-100 h-0.5 mt-4'/>
+                      <div className='flex flex-row justify-center gap-3 pt-4 flex-wrap'>
+                          {
+                            // @ts-ignore
+                            Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
+                              <SelectionButton key={element} onClickAction={() => {setNestedNestedSelection(element)}} element={element} selection={nestedNestedSelection}/>
+                            ))
+                          }
+                      </div>
+                  </>
               }
           </div>
         </>
