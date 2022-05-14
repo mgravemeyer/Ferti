@@ -1,16 +1,16 @@
 import type { NextPage } from 'next'
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import Image from "next/image";
 import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
 
-const AnnimatedNumber = ({get}: {get:number}) => {
+const AnnimatedNumber = ({get, oldInput, prefix}: {get:number, oldInput:number, prefix:string}) => {
 
-    let old = createNumberArray(0);
+    let old = createNumberArray(oldInput);
 
     function createNumberArray(number: number) {
         const numberArray = number.toString().split('');
-        for (let i = 0; numberArray.length < 4; i++) {
+        for (let i = 0; numberArray.length < 5; i++) {
             if (numberArray[0] === '-') {
                 numberArray[0] = '0';
             }
@@ -37,7 +37,7 @@ const AnnimatedNumber = ({get}: {get:number}) => {
             }
         }, 0);
         // Setzten den Zahlen Array zu dem Alten Status
-        old = numberArray;
+        // old = numberArray;
     }
 
     function createNumberHTML(numbers: any, old: any, element: any) {
@@ -75,12 +75,13 @@ const AnnimatedNumber = ({get}: {get:number}) => {
     }
 
     useEffect(() => {
-        const value = parseInt(old.join('')) + get.toString();
-        animateNumber(parseInt(value), document.querySelector('.numbers'));
-    }, [animateNumber, get, old])
+        const value = parseInt(old.join('')) + (get - oldInput);
+        const prefixClass = '.' + prefix + '-numbers';
+        animateNumber(value, document.querySelector(prefixClass));
+    }, [animateNumber, get, oldInput, old])
 
     return (
-        <div className="numbers">0000</div>
+        <div className={`${prefix}-numbers numbers`}>0000</div>
     )
 }
 
@@ -115,9 +116,11 @@ type DisplayNumberProps = {
   unit: string,
   className?: string
   icon: any
+  old: number
+  prefix: string
 }
 
-const DisplayNumber = ({label, get, unit, className, icon}: DisplayNumberProps) => {
+const DisplayNumber = ({label, get, old, unit, className, icon, prefix}: DisplayNumberProps) => {
 
     return (
         <div className={`flex flex-row items-center ${className}`}>
@@ -126,7 +129,7 @@ const DisplayNumber = ({label, get, unit, className, icon}: DisplayNumberProps) 
           </div>
           <div className='flex flex-col justify-center'>
             <div className='flex flex-row items-baseline'>
-              <AnnimatedNumber get={get}/>
+              <AnnimatedNumber get={get} oldInput={old} prefix={prefix}/>
               <p className='text-kb-green-dark'>{unit}</p>
             </div>
             <p className='text-kb-green-dark'>{label}</p>
@@ -138,14 +141,26 @@ const DisplayNumber = ({label, get, unit, className, icon}: DisplayNumberProps) 
 
 const Home: NextPage = () => {
 
-  let [ausbringmenge, setAusbringmenge] =  useState(0.0);
+  let [ausbringmenge, setAusbringmenge] =  useState(1000);
   let [geschwindigkeit, setGeschwindigkeit] =  useState(10.0);
-  let [reichweite, setReichweite] =  useState(0.0);
+  let [reichweite, setReichweite] =  useState(1000);
   let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(200);
+
+  let oldAusbringmenge = useRef(0);
+  let oldReichweite = useRef(0);
+
+  useEffect(() => {
+    oldAusbringmenge.current = ausbringmenge;
+  }, [ausbringmenge])
+
+  useEffect(() => {
+    oldReichweite.current = reichweite;
+    console.log(reichweite)
+  }, [reichweite])
 
   useEffect(() => {
         setAusbringmenge(geschwindigkeit * zapfwellendrehzahl);
-        setReichweite(geschwindigkeit * geschwindigkeit);
+        setReichweite(geschwindigkeit * 8 + zapfwellendrehzahl);
   }, [geschwindigkeit, zapfwellendrehzahl])
 
   return (
@@ -172,8 +187,8 @@ const Home: NextPage = () => {
             </div>
             <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 w-60'>
               <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
-              <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} unit='m³/ha'/>
-              <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} unit='meter'/>
+              <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
+              <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
             </div>
           </div>
 
