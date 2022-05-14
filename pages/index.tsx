@@ -6,13 +6,58 @@ import tankerIcon from '../public/tanker.png';
 
 const PumpSelection = () => {
 
+    type json = {
+        Verschlauchung: {
+            Wangen : {
+                'GL 80.2/3 12bar': string
+                'GL 90.2/3 12 bar': string
+                'GL 100.2 12 bar': string
+                'GL 110.2/3 12 bar': string
+            }
+        }
+        Pumpfass: {
+            Vogelsang: {
+                'VX 186-130': string
+                'VX 186-184 - Drehkolbenpumpe': string
+                'VX 186-184 - 1.44 : 1': string
+                'VX 186-184 | 1.48 : 1': string
+                'VX 186-184 | 1.6 : 1': string
+                'VX 186-184 | 2 : 1': string
+                'VX 186-260 | Drehkolbenpumpe': string
+                'VX 186-260 | 1.6 : 1': string
+                'VX 186-368 | Drehkolbenpumpe': string
+                'VX 186-390 | Drehkolbenpumpe': string
+            }
+            Börger: {
+                'FL 776': string,
+                'FL 1036': string,
+                'EL 1550': string,
+            }
+            Eisele: {
+                'DK 22': string
+                'DK 32': string
+            }
+            Wangen: {
+                'GL 110.0': string,
+                'GL 120.0': string,
+                'GL 130.0': string,
+                'GL 140.0': string,
+            }
+        }
+        Vakuumfass: {
+            Schleuderfass: {
+                'test': string
+            }
+        }
+    }
+
     const [selection, setSelection] = useState<string>('Verschlauchung');
 
     const [nestedSelection, setNestedSelection] = useState<string>('');
 
     const [nestedNestedSelection, setNestedNestedSelection] = useState<string>('');
 
-    const optionsNew = {
+    const optionsNew: json = {
         'Verschlauchung': {
             'Wangen': {
                 'GL 80.2/3 12bar': 'test',
@@ -44,10 +89,10 @@ const PumpSelection = () => {
                 'DK 32': '',
             },
             'Wangen': {
-                'GL 110.0': 0,
-                'GL 120.0': 0,
-                'GL 130.0': 0,
-                'GL 140.0': 0,
+                'GL 110.0': '',
+                'GL 120.0': '',
+                'GL 130.0': '',
+                'GL 140.0': '',
             }
         },
         'Vakuumfass': {
@@ -70,22 +115,28 @@ const PumpSelection = () => {
 
             </div>
             <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
-                {Object.keys(optionsNew[selection]).map((element) => (
+                {
+                    // @ts-ignore
+                    Object.keys(optionsNew[selection]).map((element) => (
                   <div onClick={() => {setNestedSelection(element)}} key={element} className={`py-1 px-2 cursor-pointer ${element === nestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
                     <p>{element}</p>
                   </div>
-                ))}
+                ))
+                }
             </div>
               {nestedSelection !== '' &&
                   <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
-                      {Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
+                      {
+                          // @ts-ignore
+                          Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
                           <div onClick={() => {
                               setNestedNestedSelection(element)
                           }} key={element}
                                className={`py-1 px-2 cursor-pointer ${element === nestedNestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
                               <p>{element}</p>
                           </div>
-                      ))}
+                      ))
+                      }
                   </div>
               }
           </div>
