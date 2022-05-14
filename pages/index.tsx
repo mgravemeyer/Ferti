@@ -313,6 +313,61 @@ const AddButton = ({label, get, add, reduce, change, className, floatDigits, uni
     )
 }
 
+const Navigation = () => {
+    return (
+        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+            <div className="container flex flex-wrap justify-between items-center mx-auto">
+                <a href="" className="flex items-center">
+                    <img src="" className="mr-3 h-6 sm:h-9" alt=""/>
+                    <span
+                        className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Gülle Rechner</span>
+                </a>
+                <button data-collapse-toggle="mobile-menu" type="button"
+                        className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                    <span className="sr-only">Open main menu</span>
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                    <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                              clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
+                    <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                        <li>
+                            <a href="#"
+                               className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                               aria-current="page">Home</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    )
+}
+
 type DisplayNumberProps = {
   label: string,
   get: number,
@@ -367,51 +422,54 @@ const Home: NextPage = () => {
   }, [geschwindigkeit, zapfwellendrehzahl])
 
   return (
-      <div className='p-8 flex flex-col justify-between items-center h-screen'>
-          <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
+      <>
+          <Navigation/>
+          <div className='p-8 flex flex-col justify-between items-center h-screen'>
+              <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-          <div className='flex flex-col md:flex-row pt-8 pb-32'>
-            <div className='pt-8 w-96'>
-              <AddButton label='Geschwindigkeit'
-                         get={geschwindigkeit}
-                         add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
-                         reduce={() => setGeschwindigkeit(geschwindigkeit - 0.5)}
-                         change={(value) => setGeschwindigkeit(value)}
-                         className='pb-8 md:pb-16'
-                         floatDigits={1}
-                         unit='km/h'
-              />
-              <AddButton label='Zapfwellendrehzahl'
-                         get={zapfwellendrehzahl}
-                         add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 50)}
-                         reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 50)}
-                         change={(value) => setZapfwellendrehzahl(value)}
-                         floatDigits={0}
-                         unit='U/min'
-              />
-              <PumpSelection/>
-            </div>
-            <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 pr-2'>
-              <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
-              <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
-              <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
-            </div>
+              <div className='flex flex-col md:flex-row pt-8 pb-32'>
+                <div className='pt-8 w-96'>
+                  <AddButton label='Geschwindigkeit'
+                             get={geschwindigkeit}
+                             add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
+                             reduce={() => setGeschwindigkeit(geschwindigkeit - 0.5)}
+                             change={(value) => setGeschwindigkeit(value)}
+                             className='pb-8 md:pb-16'
+                             floatDigits={1}
+                             unit='km/h'
+                  />
+                  <AddButton label='Zapfwellendrehzahl'
+                             get={zapfwellendrehzahl}
+                             add={() => setZapfwellendrehzahl(zapfwellendrehzahl + 50)}
+                             reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 50)}
+                             change={(value) => setZapfwellendrehzahl(value)}
+                             floatDigits={0}
+                             unit='U/min'
+                  />
+                  <PumpSelection/>
+                </div>
+                <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 pr-2'>
+                  <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
+                  <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
+                  <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
+                </div>
+              </div>
+
+              <footer className="bg-kb-white flex flex-col gap-0 md:flex-row">
+                <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
+                  <p className='md:mr-8'>© 2022 Hermann Max</p>
+                </span>
+                <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
+                    <li>
+                        <a href="#" className="hover:underline text-kb-green-dark mr-2">Datenschutzbestimmungen</a>
+                    </li>
+                    <li>
+                        <a href="#" className="hover:underline text-kb-green-dark">Kontakt</a>
+                    </li>
+                </ul>
+              </footer>
           </div>
-
-          <footer className="bg-kb-white flex flex-col gap-0 md:flex-row">
-            <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
-              <p className='md:mr-8'>© 2022 Hermann Max</p>
-            </span>
-            <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
-                <li>
-                    <a href="#" className="hover:underline text-kb-green-dark mr-2">Datenschutzbestimmungen</a>
-                </li>
-                <li>
-                    <a href="#" className="hover:underline text-kb-green-dark">Kontakt</a>
-                </li>
-            </ul>
-          </footer>
-      </div>
+      </>
   )
 }
 export default Home
