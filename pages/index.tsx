@@ -6,30 +6,55 @@ import tankerIcon from '../public/tanker.png';
 
 const PumpSelection = () => {
 
-    const [selection, setSelection] = useState<number>(0);
+    const [selection, setSelection] = useState<string>('Verschlauchung');
 
-    const [nestedSelection, setNestedSelection] = useState<number>(0);
+    const [nestedSelection, setNestedSelection] = useState<string>('');
 
-    const options = [
-        {id: 0, name: 'Verschlauchung'},
-        {id: 1, name: 'Pumpfass'},
-        {id: 2, name: 'Vakkumfass'}
-    ]
+    const [nestedNestedSelection, setNestedNestedSelection] = useState<string>('');
 
-    const optionsDetail: any = {
-        0: [
-            {id: 0, name: 'Wangen'},
-        ],
-        1: [
-            {id: 0, name: 'Vogelsand'},
-            {id: 1, name: 'Börger'},
-            {id: 1, name: 'Eisele'},
-            {id: 1, name: 'Wangen'},
-            {id: 1, name: 'Diverse'}
-        ],
-        2: [
-            {id: 0, name: 'Schleuderfass'},
-        ],
+    const optionsNew = {
+        'Verschlauchung': {
+            'Wangen': {
+                'GL 80.2/3 12bar': 'test',
+                'GL 90.2/3 12 bar': 'test',
+                'GL 100.2 12 bar': 'test',
+                'GL 110.2/3 12 bar': 'test'
+            }
+        },
+        'Pumpfass': {
+            'Vogelsang': {
+                'VX 186-130': 'test',
+                'VX 186-184 - Drehkolbenpumpe': '',
+                'VX 186-184 - 1.44 : 1': 'test',
+                'VX 186-184 | 1.48 : 1': 'test',
+                'VX 186-184 | 1.6 : 1': 'test',
+                'VX 186-184 | 2 : 1': 'test',
+                'VX 186-260 | Drehkolbenpumpe': 'test',
+                'VX 186-260 | 1.6 : 1': 'test',
+                'VX 186-368 | Drehkolbenpumpe': 'test',
+                'VX 186-390 | Drehkolbenpumpe': 'test',
+            },
+            'Börger': {
+                'FL 776': '',
+                'FL 1036': '',
+                'EL 1550': '',
+            },
+            'Eisele': {
+                'DK 22': '',
+                'DK 32': '',
+            },
+            'Wangen': {
+                'GL 110.0': 0,
+                'GL 120.0': 0,
+                'GL 130.0': 0,
+                'GL 140.0': 0,
+            }
+        },
+        'Vakuumfass': {
+            'Schleuderfass': {
+                'test': 'test'
+            }
+        }
     }
 
     return (
@@ -37,20 +62,32 @@ const PumpSelection = () => {
           <div className='flex flex-col pt-6'>
           <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>Pumpen-Typ</h1>
             <div className='flex flex-row justify-center gap-1 pt-2'>
-              {options.map(option => (
-                <div onClick={() => {setNestedSelection(0);setSelection(option.id)}} key={option.id} className={`py-1 px-2 cursor-pointer ${option.id === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
-                  <p>{option.name}</p>
-                </div>
-              ))}
+                {Object.keys(optionsNew).map((element) => (
+                    <div onClick={() => {setSelection(element);setNestedSelection('')}} key={element} className={`py-1 px-2 cursor-pointer ${element === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
+                      <p>{element}</p>
+                    </div>
+                ))}
+
             </div>
             <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
-                {
-                  // @ts-ignore:next-line
-                  optionsDetail[selection.toString()].map((element, index) => (
-                    <p key={element.id} onClick={() => setNestedSelection(index)} className={`py-1 px-2 cursor-pointer ${index === nestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>{element.name}</p>
-                  ))
-                }
+                {Object.keys(optionsNew[selection]).map((element) => (
+                  <div onClick={() => {setNestedSelection(element)}} key={element} className={`py-1 px-2 cursor-pointer ${element === nestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
+                    <p>{element}</p>
+                  </div>
+                ))}
             </div>
+              {nestedSelection !== '' &&
+                  <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
+                      {Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
+                          <div onClick={() => {
+                              setNestedNestedSelection(element)
+                          }} key={element}
+                               className={`py-1 px-2 cursor-pointer ${element === nestedNestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
+                              <p>{element}</p>
+                          </div>
+                      ))}
+                  </div>
+              }
           </div>
         </>
     )
