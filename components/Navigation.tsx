@@ -1,6 +1,6 @@
 const Navigation = () => {
     return (
-        <nav className="bg-white border-gray-200 rounded dark:bg-gray-800 pb-8">
+        <nav className="bg-white border-gray-200 rounded dark:bg-gray-800 pb-12">
             <div className="flex flex-wrap justify-between items-center">
                 <a href="" className="flex items-center">
                     <img src="" className="mr-3 h-6 sm:h-9" alt=""/>
