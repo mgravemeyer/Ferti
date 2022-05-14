@@ -289,7 +289,7 @@ const AddButton = ({label, get, add, reduce, change, className, floatDigits, uni
                 style={propsMinus}
                 onMouseEnter={() => setMinus({transform: `scale(${ 1.2 })`})}
                 onMouseLeave={() => setMinus({transform: `scale(${ 1 })`})}
-                onMouseDown={() => setMinus({transform: `scale(${ 1 })`})}
+                onMouseDown={() => setMinus({transform: `scale(${ 0.9 })`})}
                 onMouseUp={() => setMinus({transform: `scale(${ 1.2 })`})}
                 className='flex items-center text-6xl text-kb-green-dark pr-3 pl-6  hover:cursor-pointer select-none'
                 onClick={() => reduce()}
@@ -301,7 +301,7 @@ const AddButton = ({label, get, add, reduce, change, className, floatDigits, uni
                 style={propsPlus}
                 onMouseEnter={() => setPlus({transform: `scale(${ 1.1 })`})}
                 onMouseLeave={() => setPlus({transform: `scale(${ 1 })`})}
-                onMouseDown={() => setPlus({transform: `scale(${ 1 })`})}
+                onMouseDown={() => setPlus({transform: `scale(${ 0.9 })`})}
                 onMouseUp={() => setPlus({transform: `scale(${ 1.1 })`})}
                 className='flex items-center text-6xl text-kb-green-dark pr-3 pl-6  hover:cursor-pointer select-none'
                 onClick={() => add()}
