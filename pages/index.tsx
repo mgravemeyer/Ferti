@@ -142,28 +142,21 @@ const PumpSelection = () => {
                 ))}
 
             </div>
-            <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
+            <div className='flex flex-row justify-center gap-3 pt-4 flex-wrap'>
                 {
-                    // @ts-ignore
-                    Object.keys(optionsNew[selection]).map((element) => (
-                  <div onClick={() => {setNestedSelection(element)}} key={element} className={`py-1 px-2 cursor-pointer ${element === nestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
-                    <p>{element}</p>
-                  </div>
-                ))
+                  // @ts-ignore
+                  Object.keys(optionsNew[selection]).map((element) => (
+                    <SelectionButton key={element} onClickAction={() => {setNestedSelection(element)}} element={element} selection={nestedSelection}/>
+                  ))
                 }
             </div>
               {nestedSelection !== '' &&
-                  <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
+                  <div className='flex flex-row justify-center gap-3 pt-4 flex-wrap'>
                       {
-                          // @ts-ignore
-                          Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
-                          <div onClick={() => {
-                              setNestedNestedSelection(element)
-                          }} key={element}
-                               className={`py-1 px-2 cursor-pointer ${element === nestedNestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
-                              <p>{element}</p>
-                          </div>
-                      ))
+                        // @ts-ignore
+                        Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
+                          <SelectionButton key={element} onClickAction={() => {setNestedNestedSelection(element)}} element={element} selection={nestedNestedSelection}/>
+                        ))
                       }
                   </div>
               }
