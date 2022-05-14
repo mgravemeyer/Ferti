@@ -38,8 +38,8 @@ const Home: NextPage = () => {
           <div className='flex flex-col justify-between items-center'>
               <h1 className='text-3xl md:text-4xl font-extrabold text-center pb-10'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-              <div className='flex flex-col md:flex-row h-full pb-8'>
-                <div className='pb-8'>
+              <div className='flex flex-col md:flex-row w-full  h-full pb-8'>
+                <div className='pb-8 flex-1'>
                   <AddButton label='Geschwindigkeit'
                              get={geschwindigkeit}
                              add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
@@ -60,14 +60,14 @@ const Home: NextPage = () => {
                   />
                   <PumpSelection/>
                 </div>
-                <div className='flex flex-col justify-center pl-4 md:pl-14 mb:pb-4 md:pt-0 pr-2 md:pb-20'>
+                <div className='flex flex-col justify-center pl-4 md:pl-14 mb:pb-4 md:pt-0 pr-2 w-full md:pb-20 md:flex-initial md:w-80'>
                   <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
                   <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
                   <DisplayNumber className='pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
                 </div>
               </div>
           </div>
-          <footer className="bg-kb-white flex flex-col gap-0 md:flex-row justify-center items-center">
+          <footer className="bg-kb-white flex flex-col gap-0 md:flex-row justify-center items-center justify-between">
             <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
               <p className='md:mr-8'>© 2022 Hermann Max</p>
             </span>
