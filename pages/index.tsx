@@ -39,8 +39,8 @@ const Home: NextPage = () => {
               <div className='flex flex-col justify-between items-center'>
                   <h1 className='text-3xl md:text-4xl font-extrabold text-center pb-10'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
-                  <div className='flex flex-col md:flex-row w-full  h-full pb-8'>
-                    <div className='pb-8 flex-1'>
+                  <div className='flex flex-col md:flex-row w-full  h-full pb-8 justify-center'>
+                    <div className='pb-8 md:flex-initial md:w-96'>
                       <AddButton label='Geschwindigkeit'
                                  get={geschwindigkeit}
                                  add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
