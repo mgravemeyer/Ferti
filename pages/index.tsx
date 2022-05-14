@@ -93,14 +93,18 @@ type AddButtonProps = {
   reduce: () => void,
   change: (value: number) => void,
   className?: string,
-  floatDigits: number
+  floatDigits: number,
+  unit: string,
 }
 
-const AddButton = ({label, get, add, reduce, change, className, floatDigits}: AddButtonProps) => {
+const AddButton = ({label, get, add, reduce, change, className, floatDigits, unit}: AddButtonProps) => {
 
     return (
       <div className={className}>
-        <h1 className='text-center text-kb-green-dark text-2xl md:pt-0'>{label}</h1>
+        <div className='flex flex-row items-end justify-center'>
+            <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>{label}</h1>
+            <h1 className='text-center text-kb-green-dark md:pt-0'>{`(${unit})`}</h1>
+        </div>
           <div className='flex flex-row justify-center'>
             <button className='text-6xl text-kb-green-dark px-3' onClick={() => reduce()}>-</button>
             <input pattern="\d*" width={2} style={{background: 'none'}} className='text-kb-green-dark border-t-0 border-x-0 border-b-2 appearance-none border-2 text-8xl border-gray-200 w-56 text-center leading-tight focus:outline-none focus:bg-white' type="number" value={get.toFixed(floatDigits)} onChange={(e) => change(parseFloat(e.target.value))}/>
@@ -176,6 +180,7 @@ const Home: NextPage = () => {
                          change={(value) => setGeschwindigkeit(value)}
                          className='pb-8 md:pb-16'
                          floatDigits={1}
+                         unit='km/h'
               />
               <AddButton label='Zapfwellendrehzahl'
                          get={zapfwellendrehzahl}
@@ -183,6 +188,7 @@ const Home: NextPage = () => {
                          reduce={() => setZapfwellendrehzahl(zapfwellendrehzahl - 50)}
                          change={(value) => setZapfwellendrehzahl(value)}
                          floatDigits={0}
+                         unit='U/min'
               />
             </div>
             <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 pr-2'>
