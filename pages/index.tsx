@@ -4,6 +4,59 @@ import Image from "next/image";
 import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
 
+const PumpSelection = () => {
+
+    const [selection, setSelection] = useState<number>(0);
+
+    const [nestedSelection, setNestedSelection] = useState<number>(0);
+
+    const options = [
+        {id: 0, name: 'Verschlauchung'},
+        {id: 1, name: 'Pumpfass'},
+        {id: 2, name: 'Vakkumfass'}
+    ]
+
+    const optionsDetail: any = {
+        0: [
+            {id: 0, name: 'Wangen'},
+        ],
+        1: [
+            {id: 0, name: 'Vogelsand'},
+            {id: 1, name: 'Börger'},
+            {id: 1, name: 'Eisele'},
+            {id: 1, name: 'Wangen'},
+            {id: 1, name: 'Diverse'}
+        ],
+        2: [
+            {id: 0, name: 'Schleuderfass'},
+        ],
+    }
+
+    return (
+        <>
+          <div className='flex flex-col pt-6'>
+          <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>Pumpen-Typ</h1>
+            <div className='flex flex-row justify-center gap-1 pt-2'>
+              {options.map(option => (
+                <div onClick={() => {setNestedSelection(0);setSelection(option.id)}} key={option.id} className={`py-1 px-2 cursor-pointer ${option.id === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
+                  <p>{option.name}</p>
+                </div>
+              ))}
+            </div>
+            <div className='flex flex-row justify-center gap-1 pt-2 flex-wrap'>
+                {
+                  // @ts-ignore:next-line
+                  optionsDetail[selection.toString()].map((element, index) => (
+                    <p key={element.id} onClick={() => setNestedSelection(index)} className={`py-1 px-2 cursor-pointer ${index === nestedSelection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>{element.name}</p>
+                  ))
+                }
+            </div>
+          </div>
+        </>
+    )
+
+}
+
 const AnnimatedNumber = ({get, oldInput, prefix}: {get:number, oldInput:number, prefix:string}) => {
 
     let old = createNumberArray(oldInput);
@@ -172,7 +225,7 @@ const Home: NextPage = () => {
           <h1 className='text-4xl font-extrabold text-center'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
           <div className='flex flex-col md:flex-row pt-8 pb-32'>
-            <div className='pt-8'>
+            <div className='pt-8 w-96'>
               <AddButton label='Geschwindigkeit'
                          get={geschwindigkeit}
                          add={() => setGeschwindigkeit(geschwindigkeit + 0.5)}
@@ -190,6 +243,7 @@ const Home: NextPage = () => {
                          floatDigits={0}
                          unit='U/min'
               />
+              <PumpSelection/>
             </div>
             <div className='flex flex-col justify-center pl-4 md:pl-8 mb:pb-4 pt-12 md:pt-0 pr-2'>
               <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
