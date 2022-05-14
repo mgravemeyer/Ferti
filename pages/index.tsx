@@ -3,6 +3,7 @@ import {useState, useEffect, useRef} from "react";
 import Image from "next/image";
 import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
+import { useSpring, animated } from 'react-spring'
 
 const PumpSelection = () => {
 
@@ -102,15 +103,27 @@ const PumpSelection = () => {
         }
     }
 
+    const props = useSpring({
+        transform: `scale(1)`,
+        from: { transform: `scale(0.5)`},
+        config: {
+            tension: 400,
+            mass: 2,
+            velocity: 5
+        }
+    })
+
     return (
         <>
           <div className='flex flex-col pt-6'>
           <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>Pumpen-Typ</h1>
             <div className='flex flex-row justify-center gap-1 pt-2'>
                 {Object.keys(optionsNew).map((element) => (
-                    <div onClick={() => {setSelection(element);setNestedSelection('')}} key={element} className={`py-1 px-2 cursor-pointer ${element === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
+                    <animated.div key={'test'} style={props}>
+                    <div onClick={() => {setSelection(element);setNestedSelection('')}} key={element} className={`transform motion-safe:hover:scale-105 py-1 px-2 cursor-pointer ${element === selection ? 'bg-kb-green-dark text-kb-white' : 'bg-kb-white text-kb-green-dark'}`}>
                       <p>{element}</p>
                     </div>
+                    </animated.div>
                 ))}
 
             </div>
