@@ -107,7 +107,7 @@ const PumpSelection = () => {
           <h1 className='text-center text-kb-green-dark text-2xl md:pt-0 mr-2'>Pumpen-Typ</h1>
             <div className='flex flex-row justify-center gap-3 pt-2'>
                 {Object.keys(optionsNew).map((element) => (
-                    <SelectionButton key={element} onClickAction={() => {console.log(element);setSelection(element);setNestedSelection('')}} element={element} selection={selection}/>
+                    <SelectionButton key={element} onClickAction={() => {setSelection(element);setNestedSelection('');setNestedNestedSelection('')}} element={element} selection={selection}/>
                 ))}
 
             </div>
@@ -127,7 +127,7 @@ const PumpSelection = () => {
                           {
                             // @ts-ignore
                             Object.keys(optionsNew[selection][nestedSelection]).map((element) => (
-                              <SelectionButton key={element} onClickAction={() => {setNestedNestedSelection(element)}} element={element} selection={nestedNestedSelection}/>
+                              <SelectionButton key={element} onClickAction={() => {setNestedNestedSelection(element); if(element === nestedNestedSelection) { setNestedNestedSelection('') }}} element={element} selection={nestedNestedSelection}/>
                             ))
                           }
                       </div>
