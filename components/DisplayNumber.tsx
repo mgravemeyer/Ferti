@@ -11,7 +11,7 @@ const DisplayNumber = ({label, get, old, unit, className, icon, prefix}: Display
           </div>
           <div className='flex flex-col justify-center'>
             <div className='flex flex-row items-baseline'>
-              <AnimatedNumber get={get} oldInput={old} prefix={prefix}/>
+              <AnimatedNumber get={get} oldInput={old} prefix={prefix}/>&nbsp;
               <p className='text-kb-green-dark'>{unit}</p>
             </div>
             <p className='text-kb-green-dark'>{label}</p>
