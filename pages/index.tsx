@@ -65,8 +65,8 @@ const Home: NextPage = () => {
                       />
                       <PumpSelection/>
                     </div>
-                    <div className='flex flex-col justify-center md:justify-start pl-4 md:pl-14 mb:pb-4 md:pt-0 pr-2 w-full md:pb-20 md:flex-initial md:w-80'>
-                      <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2 md:mt-32'>Ergebnisse:</p>
+                    <div className='ease-in flex flex-col justify-center pl-4 md:pl-14 mb:pb-4 md:pt-0 pr-2 w-full md:pb-20 md:flex-initial md:w-80 justify-center'>
+                      <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
                       <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
                       <DisplayNumber className='mb-4 pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
                       <DisplayNumberNutrition className='mb-6 pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} get={reichweite} old={oldReichweite.current} unit='kg/ha' prefix={'reichweite'}/>
