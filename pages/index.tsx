@@ -3,11 +3,13 @@ import {useState, useEffect, useRef} from "react";
 import distanceIcon from '../public/distance.png';
 import tankerIcon from '../public/tanker.png';
 import nutritionIcon from '../public/nutrition.png';
+import copyIcon from '../public/copy.png';
 import Navigation from "../components/Navigation";
 import PumpSelection from "../components/PumpSelection";
 import AddButton from "../components/AddButton";
 import DisplayNumber from "../components/DisplayNumber";
 import DisplayNumberNutrition from "../components/DisplayNumberNutrition";
+import Image from "next/image";
 
 
 const Home: NextPage = () => {
@@ -67,7 +69,13 @@ const Home: NextPage = () => {
                       <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2 md:mt-32'>Ergebnisse:</p>
                       <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
                       <DisplayNumber className='mb-4 pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
-                      <DisplayNumberNutrition className='pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} get={reichweite} old={oldReichweite.current} unit='kg/ha' prefix={'reichweite'}/>
+                      <DisplayNumberNutrition className='mb-6 pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} get={reichweite} old={oldReichweite.current} unit='kg/ha' prefix={'reichweite'}/>
+                        <div className='w-full bg-kb-green-dark flex flex-row justify-center items-center p-2 rounded-full cursor-pointer'>
+                            <div className='flex items-center h-full w-12 pr-4'>
+                                <Image alt='icon' src={copyIcon} loading={'eager'}/>
+                            </div>
+                            <p className='text-kb-white text-center'>Konfiguration kopieren</p>
+                        </div>
                     </div>
                   </div>
               </div>
