@@ -71,7 +71,7 @@ const Home: NextPage = () => {
           </div>
           <footer className="relative sm:px-20 bottom-4 lg:px-44 flex flex-col gap-0 md:flex-row justify-center items-center justify-between">
             <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
-              <p className='md:mr-8'>© 2022 Maximilian Gravemeyer</p>
+              <a href='www.maximiliangravemeyer.com' className='hover:underline md:mr-8'>© 2022 Maximilian Gravemeyer</a>
             </span>
             <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
                 <li>
