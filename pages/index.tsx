@@ -37,7 +37,7 @@ const Home: NextPage = () => {
   }, [geschwindigkeit, zapfwellendrehzahl])
 
   return (
-      <div className='flex flex-col justify-between h-full overflow-scroll'>
+      <div className='flex flex-col justify-between h-full'>
           <div className='flex flex-col p-6 sm:px-20 lg:px-44 md:py-10'>
               <Navigation/>
               <div className='flex flex-col justify-between items-center'>
