@@ -15,7 +15,10 @@ module.exports = {
     colors: {
       'kb-white': '#fff',
       'kb-green': '#005962',
-      'kb-green-dark': '#483f35'
+      'kb-green-dark': '#483f35',
+      'kb-green-light': '#55A254',
+      'kb-orange': '#A27D54',
+      'kb-red': '#A25454'
     },
     extend: {},
   },
