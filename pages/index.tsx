@@ -37,7 +37,7 @@ const Home: NextPage = () => {
           <div className='flex flex-col p-6 sm:px-20 lg:px-44 md:py-10'>
               <Navigation/>
               <div className='flex flex-col justify-between items-center'>
-                  <h1 className='text-3xl md:text-4xl font-extrabold text-center pb-10'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
+                  <h1 className='text-3xl md:text-4xl font-extrabold text-center pb-10 text-kb-green-dark'>Gülle-Nährstoffe einfach und richtig dosieren</h1>
 
                   <div className='flex flex-col md:flex-row w-full  h-full pb-8 justify-center'>
                     <div className='pb-8 md:flex-initial md:w-96'>
@@ -69,9 +69,9 @@ const Home: NextPage = () => {
                   </div>
               </div>
           </div>
-          <footer className="relative sm:px-20 bottom-4 lg:px-44 bg-kb-white flex flex-col gap-0 md:flex-row justify-center items-center justify-between">
+          <footer className="relative sm:px-20 bottom-4 lg:px-44 flex flex-col gap-0 md:flex-row justify-center items-center justify-between">
             <span className="text-sm text-kb-green-dark text-center text-kb-green-dark">
-              <p className='md:mr-8'>© 2022 Hermann Max</p>
+              <p className='md:mr-8'>© 2022 Maximilian Gravemeyer</p>
             </span>
             <ul className="flex flex-wrap items-center text-sm text-kb-green-dark">
                 <li>

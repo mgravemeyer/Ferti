@@ -1,12 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 html, body, #__next {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     height: 100%;
+    background-color: #FCF7EB;
 }
 
 @layer utilities {
@@ -17,7 +18,7 @@ html, body, #__next {
   }
 }
 .numbers {
-  color: black;
+  color: #483f35;
   line-height: 1;
   position: relative;
   display: flex;

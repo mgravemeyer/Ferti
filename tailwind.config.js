@@ -15,7 +15,7 @@ module.exports = {
     colors: {
       'kb-white': '#fff',
       'kb-green': '#005962',
-      'kb-green-dark': '#000F00'
+      'kb-green-dark': '#483f35'
     },
     extend: {},
   },
