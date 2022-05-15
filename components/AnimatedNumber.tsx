@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-const AnimatedNumber = ({get, oldInput, prefix}: {get:number, oldInput:number, prefix:string}) => {
+const AnimatedNumber = ({get, oldInput, prefix, color}: {get:number, oldInput:number, prefix:string, color?:string}) => {
 
     let old = createNumberArray(oldInput);
 
@@ -41,12 +41,12 @@ const AnimatedNumber = ({get, oldInput, prefix}: {get:number, oldInput:number, p
             if (isNaN(numbers[i]) || isNaN(old[i])) {
                 element.insertAdjacentHTML(
                     "beforeend",
-                    `<span class="number-span" data-value="${calcDeltaSight(old[i], numbers[i]).length}">${calcDeltaSight(old[i], numbers[i]).join('')}</span>`
+                    `<span class="number-span ${color}" data-value="${calcDeltaSight(old[i], numbers[i]).length}">${calcDeltaSight(old[i], numbers[i]).join('')}</span>`
                 );
             } else {
                 element.insertAdjacentHTML(
                     "beforeend",
-                    `<span class="number-span" data-value="${calcDeltaBetweenNumbers(old[i], numbers[i]).length}">${calcDeltaBetweenNumbers(old[i], numbers[i]).join('')}</span>`
+                    `<span class="number-span ${color}" data-value="${calcDeltaBetweenNumbers(old[i], numbers[i]).length}">${calcDeltaBetweenNumbers(old[i], numbers[i]).join('')}</span>`
                 );
             }
         }

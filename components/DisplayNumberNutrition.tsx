@@ -11,7 +11,7 @@ const DisplayNumberNutrition = ({label, get, old, unit, className, icon, prefix}
           </div>
           <div className='flex flex-col justify-center'>
             <div className='flex flex-row items-baseline'>
-              <AnimatedNumber get={get} oldInput={old} prefix={'test'}/>&nbsp;
+              <AnimatedNumber color={get < 300 ? 'text-kb-green-light' : 'text-kb-red'} get={get} oldInput={old} prefix={'test'}/>&nbsp;
               <p className='text-kb-green-dark'>{'N Gesamt'}</p>
             </div>
             <div className='flex flex-row items-baseline'>
