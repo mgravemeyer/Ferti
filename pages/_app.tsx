@@ -17,7 +17,7 @@ function App({ Component, pageProps }: AppProps) {
             <link rel="manifest" href={`${favIconPath}/site.webmanifest`}/>
             <link rel="mask-icon" href={`${favIconPath}/safari-pinned-tab.svg`} color="#5bbad5"/>
             <meta name="msapplication-TileColor" content="#da532c"/>
-            <meta name="theme-color" content="#ffffff"/>
+            <meta name="theme-color" content="#FCF7EB"/>
         </Head>
         <Component {...pageProps} />
       </>
