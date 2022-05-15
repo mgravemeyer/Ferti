@@ -19,8 +19,18 @@ const Home: NextPage = () => {
   let [reichweite, setReichweite] =  useState(1000);
   let [zapfwellendrehzahl, setZapfwellendrehzahl] =  useState(200);
 
+  let [nTotal, setNTotal] = useState(100);
+  let [nh4n, setNh4n] = useState(100);
+  let [p2O5, setP2O5] = useState(100);
+  let [k20, setK20] = useState(100);
+
   let oldAusbringmenge = useRef(0);
   let oldReichweite = useRef(0);
+
+  let oldNTotal = useRef(0);
+  let oldNh4n = useRef(0);
+  let oldP2O5 = useRef(0);
+  let oldK20 = useRef(0);
 
   useEffect(() => {
     oldAusbringmenge.current = ausbringmenge;
@@ -28,13 +38,32 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     oldReichweite.current = reichweite;
-    console.log(reichweite)
   }, [reichweite])
+
+  useEffect(() => {
+    oldNTotal.current = nTotal;
+  }, [nTotal])
+
+  useEffect(() => {
+    oldNh4n.current = nh4n;
+  }, [nh4n])
+
+  useEffect(() => {
+    oldP2O5.current = p2O5;
+  }, [p2O5])
+
+  useEffect(() => {
+    oldK20.current = k20;
+  }, [k20])
 
   useEffect(() => {
         setAusbringmenge(geschwindigkeit * zapfwellendrehzahl);
         setReichweite(geschwindigkeit * 8 + zapfwellendrehzahl);
-  }, [geschwindigkeit, zapfwellendrehzahl])
+        setNTotal(nh4n + p2O5 + k20);
+        setNh4n(zapfwellendrehzahl * 2 + 36);
+        setP2O5(zapfwellendrehzahl * 3 + 12);
+        setK20(zapfwellendrehzahl * 4 + 9);
+  }, [geschwindigkeit, k20, nh4n, p2O5, zapfwellendrehzahl])
 
   return (
       <div className='flex flex-col justify-between h-full'>
@@ -69,7 +98,16 @@ const Home: NextPage = () => {
                       <p className='text-2xl mb-4 text-kb-white bg-kb-green-dark pl-2'>Ergebnisse:</p>
                       <DisplayNumber className='mb-4 pl-2' icon={tankerIcon} label='Ausbringmenge' get={ausbringmenge} old={oldAusbringmenge.current} unit='m³/ha' prefix={'ausbringmenge'}/>
                       <DisplayNumber className='mb-4 pl-2' icon={distanceIcon} label='Reichweite' get={reichweite} old={oldReichweite.current} unit='meter' prefix={'reichweite'}/>
-                      <DisplayNumberNutrition className='mb-6 pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} get={reichweite} old={oldReichweite.current} unit='kg/ha' prefix={'reichweite'}/>
+                      <DisplayNumberNutrition
+                          getNTotal={nTotal}
+                          getNh4n={nh4n}
+                          getP2O5={p2O5}
+                          getK20={k20}
+                          oldNTotal={oldNTotal.current}
+                          oldNh4n={oldNh4n.current}
+                          oldP2O5={oldP2O5.current}
+                          oldK20={oldK20.current}
+                          className='mb-6 pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} unit='kg/ha' prefix={'reichweite'}/>
                         <div className='w-full bg-kb-green-dark flex flex-row justify-center items-center p-2 rounded-full cursor-pointer'>
                             <div className='flex items-center h-full w-12 pr-4'>
                                 <Image alt='icon' src={copyIcon} loading={'eager'}/>
