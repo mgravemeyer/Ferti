@@ -11,7 +11,6 @@ type DisplayNumberNutritionProps = {
   unit: string,
   className?: string
   icon: any
-  prefix: string
 }
 
 export default DisplayNumberNutritionProps;

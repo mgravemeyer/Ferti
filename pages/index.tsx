@@ -63,7 +63,7 @@ const Home: NextPage = () => {
         setNh4n(zapfwellendrehzahl * 2 + 36);
         setP2O5(zapfwellendrehzahl * 3 + 12);
         setK20(zapfwellendrehzahl * 4 + 9);
-  }, [geschwindigkeit, k20, nh4n, p2O5, zapfwellendrehzahl])
+  }, [geschwindigkeit, zapfwellendrehzahl])
 
   return (
       <div className='flex flex-col justify-between h-full'>
@@ -107,7 +107,8 @@ const Home: NextPage = () => {
                           oldNh4n={oldNh4n.current}
                           oldP2O5={oldP2O5.current}
                           oldK20={oldK20.current}
-                          className='mb-6 pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} unit='kg/ha' prefix={'reichweite'}/>
+                          className='mb-6 pl-2' icon={nutritionIcon} label={'(Angaben für kg/ha)'} unit='kg/ha'
+                      />
                         <div className='w-full bg-kb-green-dark flex flex-row justify-center items-center p-2 rounded-full cursor-pointer'>
                             <div className='flex items-center h-full w-12 pr-4'>
                                 <Image alt='icon' src={copyIcon} loading={'eager'}/>
